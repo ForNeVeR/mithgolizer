@@ -1,0 +1,11 @@
+# Login parameters
+login=username
+password=password
+server=example.com
+nickname=Mithgol
+
+# Room coordinates
+room=a@conference.example.com,b@conference.example.com
+
+# Filtering parameters
+resource=user-cccaaaeb88
