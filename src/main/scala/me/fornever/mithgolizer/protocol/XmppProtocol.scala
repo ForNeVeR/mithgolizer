@@ -35,12 +35,20 @@ object XmppProtocol {
     muc.addParticipantStatusListener(new DefaultParticipantStatusListener {
 
       override def joined(participant: String): Unit = {
+        val nickname = StringUtils.parseResource(participant)
         val occupant = muc.getOccupant(participant)
+        val occupantJid = occupant.getJid
 
-        val resource = StringUtils.parseResource(occupant.getJid)
-        if (resource == Configuration.resource) {
-          println(StringUtils.parseBareAddress(occupant.getJid) + s" ($room)")
-          muc.banUser(occupant.getJid, null)
+        val resource = StringUtils.parseResource(occupantJid)
+        if (resource == Configuration.filterResource) {
+          println(StringUtils.parseBareAddress(occupantJid) + s" ($room): filtered by resource")
+          muc.banUser(occupantJid, null)
+        } else if (Configuration.filterJid.pattern.matcher(occupantJid).matches) {
+          println(StringUtils.parseBareAddress(occupantJid) + s" ($room): filtered by JID")
+          muc.banUser(occupantJid, null)
+        } else if (Configuration.filterNickname.pattern.matcher(nickname).matches()) {
+          println(StringUtils.parseBareAddress(occupantJid) + s" ($room/$nickname): filtered by nickname")
+          muc.kickParticipant(nickname, null)
         }
       }
     })
