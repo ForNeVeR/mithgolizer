@@ -8,6 +8,6 @@ nickname=Mithgol
 room=a@conference.example.com,b@conference.example.com
 
 # Filtering parameters
-filter.resource=user-cccaaaeb88
+filter.resource=^user-cccaaaeb88$
 filter.nickname=^aaaa.*0101?$
 filter.jid=^j@example.com$

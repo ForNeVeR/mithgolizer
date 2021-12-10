@@ -40,7 +40,7 @@ object XmppProtocol {
         val occupantJid = occupant.getJid
 
         val resource = StringUtils.parseResource(occupantJid)
-        if (resource == Configuration.filterResource) {
+        if (Configuration.filterResource.pattern.matcher(resource).matches()) {
           println(StringUtils.parseBareAddress(occupantJid) + s" ($room): filtered by resource")
           muc.banUser(occupantJid, null)
         } else if (Configuration.filterJid.pattern.matcher(occupantJid).matches) {

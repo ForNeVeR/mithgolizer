@@ -38,7 +38,7 @@ object Configuration {
 
   lazy val room = properties.getProperty("room")
 
-  lazy val filterResource = properties.getProperty("filter.resource")
+  lazy val filterResource = properties.getProperty("filter.resource").r
   lazy val filterNickname = properties.getProperty("filter.nickname").r
   lazy val filterJid = properties.getProperty("filter.jid").r
 }
