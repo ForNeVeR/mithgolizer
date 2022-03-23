@@ -41,13 +41,13 @@ object XmppProtocol {
 
         val resource = StringUtils.parseResource(occupantJid)
         if (Configuration.filterResource.pattern.matcher(resource).matches()) {
-          println(StringUtils.parseBareAddress(occupantJid) + s" ($room): filtered by resource")
+          println(occupantJid + s" ($room): filtered by resource")
           muc.banUser(occupantJid, null)
         } else if (Configuration.filterJid.pattern.matcher(occupantJid).matches) {
-          println(StringUtils.parseBareAddress(occupantJid) + s" ($room): filtered by JID")
+          println(occupantJid + s" ($room): filtered by JID")
           muc.banUser(occupantJid, null)
         } else if (Configuration.filterNickname.pattern.matcher(nickname).matches()) {
-          println(StringUtils.parseBareAddress(occupantJid) + s" ($room/$nickname): filtered by nickname")
+          println(occupantJid + s" ($room/$nickname): filtered by nickname")
           muc.kickParticipant(nickname, null)
         }
       }
